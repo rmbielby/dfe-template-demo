@@ -81,9 +81,10 @@ source("R/support_links.R")
 source("R/read_data.R")
 
 # Read in the data
-dfRevBal <- read_revenue_data()
+dfProgressHE <- funcReadData('data/progress_he_la_2020.csv')
+
 # Get geographical levels from data
-dfAreas <- dfRevBal %>%
+dfAreas <- dfProgressHE %>%
   select(
     geographic_level, country_name, country_code,
     region_name, region_code,
@@ -97,11 +98,9 @@ choicesLAs <- dfAreas %>%
   arrange(area_name)
 
 choicesAreas <- dfAreas %>%
-  filter(geographic_level == "National") %>%
-  select(geographic_level, area_name = country_name) %>%
-  rbind(dfAreas %>% filter(geographic_level == "Regional") %>% select(geographic_level, area_name = region_name)) %>%
+  filter(geographic_level == "Regional") %>% 
+  select(geographic_level, area_name = region_name) %>%
   rbind(choicesLAs)
+choicesYears <- unique(dfProgressHE$time_period)
+choicesInst <- unique(dfProgressHE$institution_type)
 
-choicesYears <- unique(dfRevBal$time_period)
-
-choicesPhase <- unique(dfRevBal$school_phase)
