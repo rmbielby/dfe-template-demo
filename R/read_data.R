@@ -16,6 +16,9 @@ funcReadData <- function(file){
     dfData <- dfData %>% mutate(year = as.numeric(paste0("20",substr(format(time_period),5,6)))) %>%
       filter(geographic_level != "Parliamentary constituency",
              data_type=='Number of pupils',
-             characteristic_group=='Total') 
-return(dfData)
+             characteristic_group=='Total') %>%
+      area_name=case_when(geographic_level=='National' ~ country_name,
+                          geographic_level=='Regional' ~ region_name,
+                          TRUE ~ la_name))
+  return(dfData)
 }
