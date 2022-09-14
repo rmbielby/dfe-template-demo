@@ -1,6 +1,5 @@
 createTimeSeries <- function(df,inputArea){
-
-ggplot(df, aes(x=year,y=cohort,color=area_name)) + 
+ggplot(df, aes(x=year,y=cohort,color=institution_group)) + 
   geom_line(size = 1.2) +       
   theme_classic() +
   theme(
@@ -13,10 +12,9 @@ ggplot(df, aes(x=year,y=cohort,color=area_name)) +
   scale_y_continuous(
     labels = scales::number_format(accuracy = 1, big = ',', prefix='£')) +
   xlab("Academic year end") +
-  ylab("Average revenue balance") +
+  ylab("Number of pupils") +
   scale_color_manual(
     "Area",
-    breaks = unique(c("England",inputArea)),
     values = c("#f47738", "#1d70b8")
   )     
 }

@@ -102,5 +102,5 @@ choicesAreas <- dfAreas %>%
   select(geographic_level, area_name = region_name) %>%
   rbind(choicesLAs)
 choicesYears <- unique(dfProgressHE$time_period)
-choicesInst <- unique(dfProgressHE$institution_type)
+choicesPhase <- unique(dfProgressHE$data_type)
 
